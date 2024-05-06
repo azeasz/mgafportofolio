@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const themeSwitcher = document.querySelector('.theme-button');
   const links = document.querySelectorAll('a[href$=".jpg"]');
 
+// Tampilkan popup ketika halaman dimuat
+window.onload = function() {
+  document.getElementById('popup-modal').style.display = 'block';
+}
+    
+// Fungsi untuk menutup popup
+window.closePopup = function() {
+    document.getElementById('popup-modal').style.display = 'none';
+}
+    
   links.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault(); // Mencegah tindakan default
@@ -25,11 +35,15 @@ document.addEventListener('DOMContentLoaded', function () {
   themeSwitcher.addEventListener('click', function () {
     document.body.classList.toggle('dark');
     if (document.body.classList.contains('dark')) {
-      themeSwitcher.innerHTML = '<i class="fas fa-sun"></i>';
-        document.getElementById('project-modal').classList.add('dark');
-    } else {
       themeSwitcher.innerHTML = '<i class="fas fa-moon"></i>';
+        menuOptions.classList.add('dark');
+        document.getElementById('project-modal').classList.add('dark');
+        document.getElementById('popup-modal').classList.add('dark');
+    } else {
+      themeSwitcher.innerHTML = '<i class="fas fa-sun"></i>';
+        menuOptions.classList.remove('dark');
         document.getElementById('project-modal').classList.remove('dark');
+        document.getElementById('popup-modal').classList.remove('dark');
     }
   });
 
@@ -55,14 +69,6 @@ closeButtons.forEach(button => {
     this.parentElement.parentElement.style.display = 'none';
     menuButton.classList.remove('rotate'); // Asumsi bahwa ini adalah kelas yang digunakan untuk rotasi
   });
-});
-
-// Opsi lain jika menggunakan klik di luar untuk menutup modal
-window.addEventListener('click', function(event) {
-  if (event.target.classList.contains('modal')) {
-    event.target.style.display = 'none';
-    menuButton.classList.remove('rotate');
-  }
 });
 
 // Pastikan tombol kembali ke posisi semula ketika modal navigasi ditutup
@@ -195,5 +201,6 @@ document.querySelector('.close').addEventListener('click', function() {
   document.querySelector('.close').addEventListener('click', function() {
     this.parentElement.parentElement.style.display = 'none';
   });
+
 
 });

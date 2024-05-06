@@ -47,10 +47,28 @@ body {
   font-size: 16px;
   display: flex;
   align-items: center;
+  opacity: 85%;
+}
+
+body.dark .theme-button {
+  background-color: background-color: rgba(12, 9, 10, 0.2);
+}
+
+.theme-button:hover {
+  background: radial-gradient(circle, white 0%, navy 80%); /* Gradient putih transparan */
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Cahaya putih */
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+body.dark .theme-button:hover {
+  background: radial-gradient(circle, var(--dark-bg) 0%, white 80%); /* Gradient putih transparan */
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Cahaya putih */
 }
 
 .theme-button i {
   margin-right: 0px;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
 }
 
 .circular-menu {
@@ -90,7 +108,6 @@ body {
   transform: rotate(90deg);
 }
 
-
 .menu-options {
   list-style: none;
   padding: 0;
@@ -104,6 +121,7 @@ body {
   align-items: center;
   opacity: 0;
   transition: transform 0.5s, opacity 0.5s;
+  background-color: inherit;
 }
 
 .menu-options:not(.hidden) {
@@ -119,7 +137,8 @@ body {
   line-height: 40px;
   background-color: inherit;
   border-radius: 50%;
-  transition: transform 0.3s, color 0.3s;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0);
+  transition: transform 0.3s, color 0.3s, background 0.5s ease, box-shadow 0.5s ease;
 }
 
 .menu-options li a {
@@ -132,9 +151,32 @@ body {
   height: 100%;
 }
 
+.menu-options li a:hover {
+  background-color: inherit;
+}
+
+.menu-options li a:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: inherit;
+  color: inherit;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+dark.body .menu-options li a:hover::after{
+  background-color: inherit;
+}
+
 .menu-options li i {
   font-size: 20px;
   transition: transform 0.3s ease;
+  background-color: inherit;
 }
 
 .menu-button i {
@@ -143,15 +185,21 @@ body {
 }
 
 .menu-options li:hover {
-  background-color: inherit;
+  background: radial-gradient(circle, white 0%, navy 80%); /* Gradient putih transparan */
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Cahaya putih */
 }
 
 .menu-options li:hover i {
+  background-color: inherit;
   transform: scale(1.2); /* Membesarkan ikon saat di-hover */
 }
 
 body.dark .menu-options li:hover {
+  background: radial-gradient(circle, var(--dark-bg) 0%, white 80%); /* Gradient putih transparan */
+  box-shadow: 0 0 8px rgba(12, 9, 10, 0.8); /* Cahaya putih */
+}
+
+body.dark .menu-options li:hover i {
   background-color: inherit;
 }
 
@@ -310,17 +358,6 @@ body.dark .close {
   height: 100%;
   overflow: hidden; /* Enable scroll if needed */
 }
-
-/* Style untuk close button */
-/*#project-modal .close { 
-  position: absolute;
-  top: 20px;
-  right: 25px;
-  color: inherit;
-  font-size: 35px;
-  font-weight: bold;
-  cursor: pointer;
-}*/
 
 #project-modal.light .modal-content {
   background-color: inherit;
@@ -507,49 +544,13 @@ body.dark .description-btn:hover {
   }
 }
 
-/* Modal General Styles */
-/*.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: var(--light-bg);
-  margin: 20% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  border-radius: 5px;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}*/
-
-.certificates-container {
+.cert-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.certificate-item {
+.cert-item {
   margin: 10px;
   border: 1px solid #ddd;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -586,9 +587,74 @@ body.dark .cert-description {
   opacity: 45%;
 }
 
-.certificate-item.active .cert-description {
+.cert-item.active .cert-description {
   transform: translateY(0%);
   animation: fallIn 0.5s ease forwards;
 }
 
+.popup {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: inherit;
+  padding: 20px;
+  border-top: 1px solid #ccc;
+  opacity: 90%;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.close-popup {
+  display: inline-block;
+  position: relative;
+  padding: 8px 16px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+  background-color: navy;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease; /* Animasi transisi untuk background color */
+}
+
+.close-popup:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 200%; /* Lebar gradient dua kali lipat dari tombol */
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 80%); /* Gradient putih transparan */
+  transition: left 0.3s ease; /* Animasi untuk perubahan posisi gradient saat hover */
+  border-radius: 50%; /* Untuk membuat gradient berbentuk bulat */
+  z-index: -1; /* Mengatur z-index agar gradient berada di bawah tombol */
+}
+
+.close-popup:hover:before {
+  left: -50%; /* Menggeser gradient ke kiri agar hanya setengah badan tombol yang bercahaya */
+}
+
+.close-popup:hover {
+  background-color: darkgray; /* Warna akan berubah saat di-hover */
+  color: navy;
+}
+
+body.dark .popup {
+  background-color: inherit;
+}
+
+body.dark .close-popup{
+  background-color: navy;
+  color: var(--dark-text);
+}
+
+body.dark .close-popup:hover {
+  background-color: inherit; /* Warna akan berubah saat di-hover */
+}
 

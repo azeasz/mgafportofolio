@@ -9,21 +9,30 @@
 </head>
 <body class="light">
   <div class="theme-switcher">
-    <button class="theme-button"><i class="fas fa-moon"></i></button>
+    <button class="theme-button"><i class="fas fa-sun"></i></button>
   </div>
   <nav class="circular-menu">
     <div class="menu-button"><i class="fas fa-bars"></i></div>
     <ul class="menu-options hidden">
-      <li><a href="#home" id="home-link"><i class="fas fa-comments"></i></a></li>
-      <li><a href="#about" id="about-link"><i class="fas fa-user"></i></a></li>
-      <li><a href="#services" id="services-link"><i class="fas fa-briefcase"></i></a></li>
-      <li><a href="#contact" id="contact-link"><i class="fas fa-envelope"></i></a></li>
-      <li><a href="#project" id="project-link"><i class="fas fa-project-diagram"></i></a></li>
-      <li><a href="#achievement" id="achievement-link"><i class="fas fa-trophy"></i></a></li>
-      <li><a href="#info" id="info-link"><i class="fas fa-info-circle"></i></a></li>
+      <li><a href="#home" id="home-link" data-title="Feedback"><i class="fas fa-comments"></i></a></li>
+      <li><a href="#about" id="about-link" data-title="AboutMe"><i class="fas fa-user"></i></a></li>
+      <li><a href="#services" id="services-link" data-title="Services"><i class="fas fa-briefcase"></i></a></li>
+      <li><a href="#contact" id="contact-link" data-title="Contact"><i class="fas fa-envelope"></i></a></li>
+      <li><a href="#project" id="project-link" data-title="Projects"><i class="fas fa-project-diagram"></i></a></li>
+      <li><a href="#achievement" id="achievement-link" data-title="Achievement"><i class="fas fa-trophy"></i></a></li>
+      <li><a href="#info" id="info-link" data-title="WebInfo"><i class="fas fa-info-circle"></i></a></li>
     </ul>
   </nav>
 
+  <!-- Popup Sambutan -->
+  <div class="popup" id="popup-modal">
+    <div class="popup-content">
+      <h2>Selamat Datang!</h2>
+      <p>Terima kasih telah mengunjungi portofolio saya.</p>
+      <button class="close-popup" onclick="closePopup()">Continue</button>
+    </div>
+  </div>
+  
   <div class="background-animation">
     <img src="bc.gif" alt="Background Animation">
   </div>
